@@ -46,6 +46,7 @@ from keras.models import Model
 from keras.layers import Input, LSTM, Dense
 import numpy as np
 
+
 batch_size = 64  # Batch size for training.
 epochs = 100  # Number of epochs to train for.
 latent_dim = 256  # Latent dimensionality of the encoding space.
@@ -53,14 +54,21 @@ num_samples = 10000  # Number of samples to train on.
 # Path to the data txt file on disk.
 data_path = 'fra-eng/fra.txt'
 
+train = pd.read_csv('./en_train.csv')
+tsid = train.sentence_id.tolist()
+tbe = train.before.tolist()
+taf = train.after.tolist()
+
 # Vectorize the data.
 input_texts = []
 target_texts = []
+
 input_characters = set()
 target_characters = set()
-lines = open(data_path, 'r', encoding='utf-8').read().split('\n')
-for line in lines[: min(num_samples, len(lines) - 1)]:
-    input_text, target_text = line.split('\t')
+
+for line in range(min(num_samples, len(train.before) - 1)):
+    input_text = train.before[line]
+    target_text = train.after[line]
     # We use "tab" as the "start sequence" character
     # for the targets, and "\n" as "end sequence" character.
     target_text = '\t' + target_text + '\n'
