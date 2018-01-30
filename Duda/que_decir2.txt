@@ -1,0 +1,13 @@
+One approach is doing nothing. In our data set, the 93.39 % remains without changes after the normalization.
+The second approach is doing two word embeddings: one with the train data before normalization and the other, after normalize. So, if we want to normalize a word, we follow the following steps:
+1. Check if the word is in the vocabulary of the first embedding.
+2. If it is included, we find the embedding and the word in the second embedding that have the most similar embedding with our word. This word will be our normalization.
+3. It it is not included, we do not do any changes.
+We tried this method with the first 10000 words of the test data set, and we obtain 93.49 % of accurancy.
+
+Other approach is using the word embedding for classifying in one of the 16 classes.
+So, if we want to normalize a word, we follow the following steps:
+1. Check if the word is in the vocabulary of the embedding.
+2. If it is included, we find the embedding and we use a trained neural network to classify it.
+3. It it is not included, we assign the most common label: "PLAIN".
+We had obtain a multiclassificator with 96.87 % of accurancy. As each class follows a few fixed rules for its normalization, it could be a good method to solve this problem.
