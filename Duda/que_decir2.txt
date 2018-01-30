@@ -6,8 +6,15 @@ The second approach is doing two word embeddings: one with the train data before
 We tried this method with the first 10000 words of the test data set, and we obtain 93.49 % of accurancy.
 
 Other approach is using the word embedding for classifying in one of the 16 classes.
-So, if we want to normalize a word, we follow the following steps:
+So, if we want to classify a word, we follow the following steps:
 1. Check if the word is in the vocabulary of the embedding.
 2. If it is included, we find the embedding and we use a trained neural network to classify it.
 3. It it is not included, we assign the most common label: "PLAIN".
 We had obtain a multiclassificator with 96.87 % of accurancy. As each class follows a few fixed rules for its normalization, it could be a good method to solve this problem.
+We had trained a multilayer neuronal network, with two hidden layers.
+
+We can also use a similar neuronal network for classifying in two classes, depending if the word does not need normalization or it does. Similarly, we follow the following steps:
+1. Check if the word is in the vocabulary of the embedding.
+2. If it is included, we find the embedding and we use a trained neural network to classify it.
+3. It it is not included, we assign the most common label: the word does not need normalization.
+We obtain a binary classificator with 97.07% of accurancy. As each class follows a few fixed rules, they can be normalize with no machine learning algorithms, it could be another method to solve this problem .
